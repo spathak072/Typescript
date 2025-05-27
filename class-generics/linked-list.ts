@@ -3,11 +3,16 @@ class ListNode {
         
     }
 }
-class LinkedList {
+class LinkedList<T> {
     private root?:ListNode; // Optional property
     private length = 0;
 
+    add(value:T): void {
+       
+    }
+
 }
 
-const list = new LinkedList();
+const numberList = new LinkedList<number>();
+const nameList = new LinkedList<string>();
 
