@@ -9,6 +9,12 @@ class LinkedList<T> {
     private tail?:ListNode<T>; // Optional property
     private length = 0;
 
+    getLength(): number {
+        return this.length;
+    }
+
+    
+
     add(value:T): void {
        const node = new ListNode(value);
          if (!this.root) {
@@ -22,8 +28,21 @@ class LinkedList<T> {
             this.length++;
     }
 
+    print(){
+        let current = this.root;
+        while (current) {
+            console.log(current.value);
+            current = current.next;
+        }
+    }
+
 }
 
 const numberList = new LinkedList<number>();
+numberList.add(1);
+numberList.add(2);
+numberList.add(3);
+numberList.print();
+console.log("Length of numberList:", numberList.getLength());
 const nameList = new LinkedList<string>();
 
