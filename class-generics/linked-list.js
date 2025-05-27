@@ -8,19 +8,18 @@ class ListNode {
 }
 class LinkedList {
     root; // Optional property
+    tail; // Optional property
     length = 0;
     add(value) {
         const node = new ListNode(value);
         if (!this.root) {
             this.root = node;
+            this.tail = node;
             this.length++;
             return;
         }
-        let current = this.root;
-        while (current.next) {
-            current = current.next;
-        }
-        current.next = node;
+        this.tail.next = node; // Use non-null assertion operator
+        this.tail = node; // Update tail to the new node
         this.length++;
     }
 }
