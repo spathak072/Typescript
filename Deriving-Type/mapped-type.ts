@@ -1,14 +1,14 @@
 type Operations ={
-    add: (a: number, b: number) => number;
-    subtract: (a: number, b: number) => number;
+    readonly add: (a: number, b: number) => number;
+    readonly subtract: (a: number, b: number) => number;
 }
 
 type Results = {
-    [Key in keyof Operations] : ReturnType<Operations[Key]>;
+    -readonly [Key in keyof Operations]? : ReturnType<Operations[Key]>;
 }
 
 const mathOperations: Operations = {
-    add: (a:number, b:number) => a + b,
+     add: (a:number, b:number) => a + b,
     subtract: (a:number, b:number) => a - b
 }
 
