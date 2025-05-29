@@ -1,3 +1,7 @@
+type keyOf<T, V = any> = {
+  [K in keyof T]: T[K] extends V ? K : never
+}[keyof T];
+
 type User = { name: string; age: number; isActive: boolean };
 type UserKeys = keyof User; // "name" | "age" | "isActive"
 type UserKeyOf = keyOf<User>; // "name" | "age" | "isActive"
@@ -36,7 +40,7 @@ const user: User = {
 const keyOfUserName = getPropertyOf(user, "name"); // "Alice"
 const userAge = getPropertyOf(user, "age"); // 30
 const userIsActive = getPropertyOf(user, "isActive"); // true
-const userInvalid = getPropertyOf(user, "invalidKey"); // Error: Property invalidKey does not exist on the object
+// const userInvalid = getPropertyOf(user, "invalidKey"); // Error: Property invalidKey does not exist on the object
 const userName2 = getPropertyOf(user, "name" as UserKeys); // "Alice"
 const userAge2 = getPropertyOf(user, "age" as UserKeys); // 30
 const userIsActive2 = getPropertyOf(user, "isActive" as UserKeys); // true
