@@ -1,16 +1,17 @@
-function Logger(constructor: Function){
-    console.log("Logger decorator called");
-    console.log("Constructor:", constructor);
+function Logger(logString?: string): ClassDecorator {
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log('Constructor:', constructor);
+  };
 }
 
-@Logger
+@Logger("LOGGING-PERSON")
 class Person {
-    name= "John Doe";
-    constructor() {
-        console.log("Creating Person instance");
-        
-    }
+  name = 'John Doe';
+  constructor() {
+    console.log('Creating Person instance');
+  }
 }
 
 const pers = new Person();
-console.log("pers",pers.name); // "John Doe"
+console.log('pers', pers.name); // "John Doe"
