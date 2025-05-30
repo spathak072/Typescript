@@ -25,9 +25,9 @@ function autoBind(target:(...args:any[])=>any, ctx: ClassMethodDecoratorContext)
          this[ctx.name] = this[ctx.name].bind(this);
     })
     // Return a new function that binds 'this' to the original method
-    // return function(...args: any[]) {
-    //     return target.apply(, args);
-    // }
+    return function(this:any) {
+        return target.apply(this);
+    }
     
 }
 
