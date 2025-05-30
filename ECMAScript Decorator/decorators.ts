@@ -7,7 +7,23 @@ function logger<T extends new (...args:any[])=>any>(target: T, ctx: ClassDecorat
     // You can modify the target or add properties
     return class extends target {
         age= 30; // Adding a new property to the class
+        constructor(...args: any[]) {
+            super(...args);
+            console.log("Logger Decorator: Constructor called");
+            console.log("New instance created with age:", this);
+        }
     }
+    
+}
+
+function autoBind(target:(...args:any[])=>any, ctx: ClassMethodDecoratorContext) {
+    console.log("AutoBind Decorator called");
+    console.log("Target:", target);
+    console.log("Context:", ctx);
+    // Return a new function that binds 'this' to the original method
+    // return function(...args: any[]) {
+    //     return target.apply(, args);
+    // }
     
 }
 
@@ -15,6 +31,7 @@ function logger<T extends new (...args:any[])=>any>(target: T, ctx: ClassDecorat
 class Person {
     name = "Max";
 
+    @autoBind
     greet() {
         console.log(`Hello, ${this.name}`);
     }
