@@ -62,6 +62,17 @@ function autoBind(target, ctx) {
         return target.apply(this);
     };
 }
+// Target alway
+function fieldLogger(target, ctx) {
+    console.log("Field Logger Decorator called");
+    console.log("Target:", target);
+    console.log("Context:", ctx);
+    // You can modify the target or add properties
+    return (initialValue) => {
+        console.log(initialValue);
+        return "";
+    };
+}
 let Person = (() => {
     let _classDecorators = [logger];
     let _classDescriptor;

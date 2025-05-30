@@ -31,6 +31,19 @@ function autoBind(target:(...args:any[])=>any, ctx: ClassMethodDecoratorContext)
     
 }
 
+// Target alway
+function fieldLogger(target: undefined, ctx: ClassFieldDecoratorContext) {
+    console.log("Field Logger Decorator called");
+    console.log("Target:", target);
+    console.log("Context:", ctx);
+    // You can modify the target or add properties
+     return (initialValue:any)=>{
+        console.log(initialValue);
+        return ""
+        
+            };
+}
+
 @logger
 class Person {
     name = "Max";
