@@ -5,7 +5,19 @@ function Logger(logString?: string): ClassDecorator {
   };
 }
 
-@Logger("LOGGING-PERSON")
+function withTemplate(template:string, hookId:string){
+    return function(constructor: any){
+        const element = document.getElementById(hookId);
+        const p = new constructor();
+        if (element) {
+            element.innerHTML = template;
+            element.querySelector('h1')!.textContent = p.name;
+        }
+    }
+}
+
+// @Logger("LOGGING-PERSON")
+@withTemplate('<h1>My Person Object</h1>', 'app')
 class Person {
   name = 'John Doe';
   constructor() {
