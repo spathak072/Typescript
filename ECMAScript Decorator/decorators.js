@@ -53,6 +53,10 @@ function autoBind(target, ctx) {
     console.log("AutoBind Decorator called");
     console.log("Target:", target);
     console.log("Context:", ctx);
+    ctx.addInitializer(function () {
+        console.log("AutoBind: Initializer called for", this);
+        this[ctx.name] = this[ctx.name].bind(this);
+    });
     // Return a new function that binds 'this' to the original method
     // return function(...args: any[]) {
     //     return target.apply(, args);
@@ -85,4 +89,6 @@ let Person = (() => {
 })();
 const person = new Person();
 person.greet(); // Hello, Max
-console.log("Person instance:", person); // Person instance: Person { name: 'Max', age: 30 }
+console.log("Person instance:", person); // Person instance: Person { name: 'Max', age: 30 }\
+const max = person.greet;
+max(); // Hello, undefined
