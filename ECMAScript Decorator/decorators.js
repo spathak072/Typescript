@@ -33,12 +33,16 @@ var __runInitializers = (this && this.__runInitializers) || function (thisArg, i
     }
     return useValue ? value : void 0;
 };
+// ECMA Script Decorator
 // Decorator are just JS Functions
 function logger(target, ctx) {
     console.log("Logger Decorator called");
     console.log("Target:", target);
     console.log("Context:", ctx);
     // You can modify the target or add properties
+    return class extends target {
+        age = 30; // Adding a new property to the class
+    };
 }
 let Person = (() => {
     let _classDecorators = [logger];
@@ -61,3 +65,6 @@ let Person = (() => {
     };
     return Person = _classThis;
 })();
+const person = new Person();
+person.greet(); // Hello, Max
+console.log("Person instance:", person); // Person instance: Person { name: 'Max', age: 30 }
