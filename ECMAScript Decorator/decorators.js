@@ -58,9 +58,9 @@ function autoBind(target, ctx) {
         this[ctx.name] = this[ctx.name].bind(this);
     });
     // Return a new function that binds 'this' to the original method
-    // return function(...args: any[]) {
-    //     return target.apply(, args);
-    // }
+    return function () {
+        return target.apply(this);
+    };
 }
 let Person = (() => {
     let _classDecorators = [logger];
